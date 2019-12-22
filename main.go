@@ -1,10 +1,23 @@
 package main
 
-import "fmt"
-import "github.com/nkibbey/aoc/intcode"
+import (
+	"github.com/nkibbey/aoc/intcode"
+	"io/ioutil"
+	"strconv"
+	"strings"
+)
+
+func getIntArr(filepath string) []int {
+	input, _ := ioutil.ReadFile(filepath)
+	intArr := make([]int, 0)
+	for _, val := range strings.Split(string(input), ",") {
+		currInt, _ := strconv.Atoi(val)
+		intArr = append(intArr, currInt)
+	}
+
+	return intArr
+}
 
 func main() {
-
-	fmt.Println("hi")
-	fmt.Printf("1 + 3 = %d\n", intcode.Add(1,3))
+	intcode.ParseOpcode(getIntArr("resources/day2.txt"))
 }
