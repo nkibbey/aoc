@@ -1,10 +1,11 @@
 package main
 
 import (
-	"github.com/nkibbey/aoc/2019/intcode"
 	"io/ioutil"
 	"strconv"
 	"strings"
+
+	"aoc/2019/intcode"
 )
 
 func getIntArr(filepath string) []int {
