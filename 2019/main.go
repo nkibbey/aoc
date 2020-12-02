@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/nkibbey/aoc/intcode"
+	"github.com/nkibbey/aoc/2019/intcode"
 	"io/ioutil"
 	"strconv"
 	"strings"
