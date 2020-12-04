@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cat day4.txt | awk '
+cat samp.txt | awk '
 BEGIN {
     print "[ "
     nl = 1
