@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"fmt"
 	"io/ioutil"
 	"strconv"
 	"strings"
@@ -16,4 +17,14 @@ func GetIntSlice(csvFile string) []int {
 	}
 
 	return is
+}
+
+// GetStringSlice takes file where slice is made from splitting on newlines
+func GetStringSlice(fn string) []string {
+	input, err := ioutil.ReadFile(fn)
+	if err != nil {
+		fmt.Println("asdffasd")
+		return []string{}
+	}
+	return strings.Split(string(input), "\n")
 }
