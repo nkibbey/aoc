@@ -4,6 +4,7 @@ import (
 	"aoc/utils"
 	"fmt"
 	"math"
+	"sort"
 )
 
 func verifyInput(min, max int, dirs string) {
@@ -38,26 +39,41 @@ func PrintSeatingsAndIds(dirs []string) {
 		if len(dir) == 10 {
 			row := seatFind(0, 127, dir[:7])
 			col := seatFind(0, 7, dir[7:])
-			fmt.Printf(" - %s: row %d, column %d, seat ID %d\n", dir, row, col, (row * 8 + col))
+			fmt.Printf(" - %s: row %d, column %d, seat ID %d\n", dir, row, col, (row*8 + col))
 		}
-	} 
+	}
 }
 
-func HighestId(dirs []string) int {
+func highestId(dirs []string) int {
 	h := -1
 
 	for _, dir := range dirs {
 		if len(dir) == 10 {
 			row := seatFind(0, 127, dir[:7])
 			col := seatFind(0, 7, dir[7:])
-			id := row * 8 + col
+			id := row*8 + col
 			if id > h {
 				h = id
 			}
 		}
-	} 
+	}
 
 	return h
+}
+
+func getIds(dirs []string) []int {
+	ids := []int{}
+
+	for _, dir := range dirs {
+		if len(dir) == 10 {
+			row := seatFind(0, 127, dir[:7])
+			col := seatFind(0, 7, dir[7:])
+			id := row*8 + col
+			ids = append(ids, id)
+		}
+	}
+
+	return ids
 }
 
 func main() {
@@ -77,7 +93,11 @@ func main() {
 	// fmt.Println(seatFind(0, 7, "RLL"))
 	// fmt.Println("should be 102 4")
 	dirs := utils.GetStringSlice("day5.txt")
-	PrintSeatingsAndIds(dirs)
-	fmt.Println(HighestId(dirs))
-
+	// PrintSeatingsAndIds(dirs)
+	// fmt.Println(highestId(dirs))
+	ids := getIds(dirs)
+	// fmt.Println(ids)
+	sort.Slice(ids, func(i, j int) bool { return ids[i] < ids[j] })
+	fmt.Println(ids)
+	fmt.Println(len(ids))
 }
