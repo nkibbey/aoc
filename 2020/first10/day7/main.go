@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"regexp"
 	"strings"
 )
@@ -17,6 +16,12 @@ dark olive bags contain 3 faded blue bags, 4 dotted black bags.
 vibrant plum bags contain 5 faded blue bags, 6 dotted black bags.
 faded blue bags contain no other bags.
 dotted black bags contain no other bags.`
+
+	samp2 = `
+
+
+`
+
 	bnameReg   = regexp.MustCompile(`[0-9]\s[a-z]+\s[a-z]+`)
 	twoWordReg = regexp.MustCompile(`[a-z]+\s[a-z]+`)
 )
@@ -51,6 +56,12 @@ func refine(rules map[string][]string) {
 	}
 }
 
+type tree struct {
+	name     string
+	num      int
+	children []tree
+}
+
 // func resolveList(target string, colors map[string][]string) {
 // 	// for _, val := range colors {
 // 	// 	for _, c := range val {
@@ -82,7 +93,26 @@ func find(target string, rules map[string][]string, foundkeys map[string]int) {
 	// return foundkeys
 }
 
-func outerOptions(target string, rules map[string][]string) {
+// func addToTree(rules map[string][]string) tree {
+// 	result := tree{name: "shiny gold", num: 0}
+// 	target := "shiny gold"
+// 	childRules := rules[target];
+// 	for len(childRules) != 0 {
+// 		fmt.Println(childRules)
+// 		for _, rchild := range childRules {
+
+// 		}
+// 		// if len(rchild) < 3 {
+// 		// 	fmt.Println("ahhhh")
+// 		// 	return tree{}
+// 		// }
+// 		// child := strings.TrimSpace(rchild[2:])
+
+// 	}
+// 	return result
+// }
+
+func totalTarget(target string, rules map[string][]string) {
 	for base, inner := range rules {
 		fmt.Println("Base, ", base, "\tinner, ", inner, "\tlen inner, ", len(inner))
 
@@ -91,20 +121,25 @@ func outerOptions(target string, rules map[string][]string) {
 }
 
 func main() {
-	x := inputToRules(samp)
-	// fmt.Println(x)
-	refine(x)
-	// fmt.Println(x)
-	y := make(map[string]int)
-	find("shiny gold", x, y)
+	// x := inputToRules(samp)
+	// // fmt.Println(x)
+	// refine(x)
+	// // fmt.Println(x)
+	// y := make(map[string]int)
+	// find("shiny gold", x, y)
 
-	fmt.Println(len(y))
+	// fmt.Println(len(y))
 
-	input, _ := ioutil.ReadFile("day7.txt")
-	x = inputToRules(string(input))
-	refine(x)
-	y = make(map[string]int)
-	fmt.Println(y)
-	find("shiny gold", x, y)
-	fmt.Println(len(y))
+	// input, _ := ioutil.ReadFile("day7.txt")
+	// // x := inputToRules(string(input))
+	// z := inputToRules(string(input))
+	// addToTree(z)
+
+	// fmt.Println(z)
+	// refine(x)
+	// y := make(map[string]int)
+	// fmt.Println(y)
+	// find("shiny gold", x, y)
+	// fmt.Println((y))
+
 }

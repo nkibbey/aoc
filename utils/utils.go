@@ -19,7 +19,7 @@ func FileToIntsBy(file, separator string) []int {
 		currInt, _ := strconv.Atoi(val)
 		is = append(is, currInt)
 	}
-	return is
+	return is[:len(is)-1]
 }
 
 // GetStringSlice takes file where slice is made from splitting on newlines
