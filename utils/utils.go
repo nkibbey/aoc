@@ -1,7 +1,6 @@
 package utils
 
 import (
-	"fmt"
 	"io/ioutil"
 	"strconv"
 	"strings"
@@ -24,10 +23,11 @@ func FileToIntsBy(file, separator string) []int {
 
 // GetStringSlice takes file where slice is made from splitting on newlines
 func GetStringSlice(fn string) []string {
-	input, err := ioutil.ReadFile(fn)
-	if err != nil {
-		fmt.Println("asdffasd")
-		return []string{}
-	}
-	return strings.Split(string(input), "\n")
+	return FileToStringsBy(fn, "\n")
+}
+
+func FileToStringsBy(file, sep string) []string {
+	input, _ := ioutil.ReadFile(file)
+	s := strings.Split(string(input), sep)
+	return s[:len(s)-1]
 }
